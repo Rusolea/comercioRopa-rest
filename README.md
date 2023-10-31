@@ -9,3 +9,5 @@ Obtener detalles de un producto/categoría específico
 Agregar nuevos productos/categorías
 Actualizar productos/categorías
 Eliminar productos/categorías
+
+# prueba con posman

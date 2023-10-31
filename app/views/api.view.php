@@ -3,6 +3,7 @@
         public function response($data, $status) {
             header('Content-type: application/json');
             header('HTTP/1.1 '.$status." ".$this->_requestStatus($status));
+            //convierte los datos a formato json
             echo json_encode($data);
         }
 
