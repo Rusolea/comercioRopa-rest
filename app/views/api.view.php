@@ -1,6 +1,6 @@
 <?php
     class ApiView {
-        public function response($data, $status) {
+        public function response($data, $status) { //llamamos a este método desde el controlador
             header('Content-type: application/json');
             header('HTTP/1.1 '.$status." ".$this->_requestStatus($status));
             echo json_encode($data);
