@@ -43,3 +43,7 @@ Reemplazar :ID con el ID del producto que deseas actualizar y envía los detalle
 Eliminar un Producto
 DELETE http://localhost/TPEWEB2-ApiRest/comercioRopa-rest/api/products/:ID
 Reemplazar :ID con el ID del producto que deseas eliminar.
+
+
+El servicio que lista una colección entera debe poder ordenarse opcionalmente por al menos un campo de la tabla, de manera ascendente o descendente.
+http://localhost/TPEWEB2-ApiRest/comercioRopa-rest/api/products?campoOrden=precio&tipoOrden=ASC
