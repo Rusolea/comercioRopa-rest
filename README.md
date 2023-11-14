@@ -47,3 +47,33 @@ Reemplazar :ID con el ID del producto que deseas eliminar.
 
 El servicio que lista una colección entera debe poder ordenarse opcionalmente por al menos un campo de la tabla, de manera ascendente o descendente.
 http://localhost/TPEWEB2-ApiRest/comercioRopa-rest/api/products?campoOrden=precio&tipoOrden=ASC
+
+Endpoints para Categorías
+
+Listar Todas las Categorías
+GET http://localhost/TPEWEB2-ApiRest/comercioRopa-rest/api/categories
+Devuelve una lista de todas las categorías.
+
+Obtener Detalles de una Categoría Específica
+GET http://localhost/TPEWEB2-ApiRest/comercioRopa-rest/api/categories/:ID
+Reemplazar :ID con el ID de la categoría para obtener sus detalles.
+Ejemplo: http://localhost/TPEWEB2-ApiRest/comercioRopa-rest/api/categories/1
+
+Agregar una Nueva Categoría
+POST http://localhost/TPEWEB2-ApiRest/comercioRopa-rest/api/categories
+Envía un objeto JSON con los detalles de la nueva categoría en el cuerpo de la petición.
+{
+  "nombre_categoria": "Accesorios para la mujer"
+}
+
+Actualizar una Categoría
+PUT http://localhost/TPEWEB2-ApiRest/comercioRopa-rest/api/categories/:ID
+Reemplazar :ID con el ID de la categoría que deseas actualizar y envía los detalles actualizados en el cuerpo de la petición.
+
+{
+  "nombre_categoria": "Accesorios de moda femenina"
+}
+
+Eliminar una Categoría
+DELETE http://localhost/TPEWEB2-ApiRest/comercioRopa-rest/api/categories/:ID
+Reemplazar :ID con el ID de la categoría que deseas eliminar.

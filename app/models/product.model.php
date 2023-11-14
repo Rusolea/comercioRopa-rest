@@ -5,18 +5,7 @@
 
 
 class ProductModel extends Model {  
-    /**
-     * Obtiene y devuelve de la base de datos todas las productos.
-     */
-    // function getAllProducts() {
-    //     $query = $this->db->prepare('SELECT * FROM producto');
-    //     $query->execute();
-
-    //     // $products es un arreglo de tareas
-    //     $products = $query->fetchAll(PDO::FETCH_OBJ);
-
-    //     return $products;
-    // }
+    
     function getAllProducts($params = []) {
         var_dump($params);
         // Definir los campos permitidos para ordenar
@@ -37,8 +26,6 @@ class ProductModel extends Model {
         if (!in_array($tipoOrden, $tiposOrdenPermitidos)) {
             $tipoOrden = "ASC";
         }
-    
-        // Utilizar un enfoque seguro para construir la cláusula ORDER BY
         //En lugar de concatenar directamente los valores de $campoOrden y $tipoOrden en la consulta, 
         //utilizo una estructura switch para construir de manera segura la parte de la cláusula ORDER BY. Esto reduce el riesgo de inyecciones SQL.
 
@@ -71,6 +58,7 @@ class ProductModel extends Model {
     
         return $products;
     }
+    
     
     
     //obtener un producto por id
@@ -109,32 +97,31 @@ class ProductModel extends Model {
 }
 
     //obtener todas las categorias
-    //obtener todas las categorias
     function getCategorias() {
         $query = $this->db->prepare('SELECT * FROM categoria');
         $query->execute();
         return $query->fetchAll(PDO::FETCH_OBJ);
     }
     //obtener una categoria por id
-    function getCategoria($id) {
+    function getCategory($id) {
         $query = $this->db->prepare('SELECT * FROM categoria WHERE id=?');
         $query->execute(array($id));
         return $query->fetch(PDO::FETCH_OBJ);
     }
     
-    function insertCategoria($nombre) {
-        $query = $this->db->prepare('INSERT INTO categoria(nombre) VALUES(?)');
-        $query->execute(array($nombre));
+    function insertCategory($nombre_categoria) {
+        $query = $this->db->prepare('INSERT INTO categoria(nombre_categoria) VALUES(?)');
+        $query->execute(array($nombre_categoria));
     }
 
-    function deleteCategoria($id) {
+    function deleteCategory($id) {
         $query = $this->db->prepare('DELETE FROM categoria WHERE id=?');
         $query->execute(array($id));
     }
 
-    function updateCategoria($nombre, $id) {
-        $query = $this->db->prepare('UPDATE categoria SET nombre=? WHERE id=?');
-        $query->execute(array($nombre, $id));
+    function updateCategory($id, $nombre_categoria) {
+        $query = $this->db->prepare('UPDATE categoria SET nombre_categoria=? WHERE id=?');
+        $query->execute(array($nombre_categoria, $id));
     }
 
     //En el caso de que no exista la tabla, la crea

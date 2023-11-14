@@ -70,31 +70,6 @@
             }
     
         }
-
-        // public function createProduct($params = []) {
-        //     $body = $this->getData();
-        //     $nombre = $body->nombre;
-        //     $descripcion = $body->descripcion;
-        //     $precio = $body->precio;
-        //     $id_categoria = $body->id_categoria;
-
-            
-        //     if (empty($nombre) || empty($descripcion) || empty($precio) || empty($id_categoria)) {
-        //         $this->view->response("Complete los datos", 400);
-        //         return; 
-        //     }
-        
-        //     $id = $this->model->insert($nombre, $descripcion, $precio, $id_categoria);
-        
-        //     if ($id) { 
-                
-        //         $producto = $this->model->get($id);
-        //         $this->view->response($producto, 201);
-        //     }
-        //     else {
-        //         $this->view->response("El producto no pudo insertarse", 500);
-        //     }
-        // }
         public function createProduct ($params = []) {
             $body = $this->getData();
             $nombre = $body->nombre;
@@ -134,7 +109,7 @@
         }
 
         public function getCategories($params = []) {
-            $categories = $this->model->getCategories();
+            $categories = $this->model->getCategorias();
             $this->view->response($categories, 200);
         }
 
@@ -148,15 +123,43 @@
             }
         }
 
-        public function getProductsByCategory($params = []) {
+        public function createCategory($params = []) {
+            $body = $this->getData();
+            $nombre_categoria = $body->nombre_categoria;
+            if (empty($nombre_categoria)) { 
+                $this->view->response("Complete los datos", 400);
+            } else {
+                $id = $this->model->insertCategory($nombre_categoria);
+                $category = $this->model->getCategory($id);
+                $this->view->response("La categoria fue insertada con éxito", 200);
+
+            }
+        }
+
+        public function deleteCategory($params = []) {
             $id = $params[':ID'];
-            $products = $this->model->getProductsByCategory($id);
-            if ($products) {
-                $this->view->response($products, 200);
+            $category = $this->model->getCategory($id);
+            if ($category) {
+                $this->model->deleteCategory($id);
+                $this->view->response("La categoria con el id=$id fue eliminada con éxito", 200);
             } else {
                 $this->view->response("La categoria con el id=$id no existe", 404);
             }
         }
+
+        public function updateCategory($params = []) {
+            $id = $params[':ID'];
+            $category = $this->model->getCategory($id);
+            if ($category) {
+                $body = $this->getData();
+                $nombre_categoria = $body->nombre_categoria;
+                $this->model->updateCategory($id, $nombre_categoria);
+                $this->view->response("La categoria fue actualizada con éxito", 200);
+            } else {
+                $this->view->response("La categoria con el id=$id no existe", 404);
+            }
+        }
+        
 
     }
 ?>     
