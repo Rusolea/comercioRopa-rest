@@ -71,38 +71,52 @@
     
         }
 
-        public function createProduct($params = []) {
+        // public function createProduct($params = []) {
+        //     $body = $this->getData();
+        //     $nombre = $body->nombre;
+        //     $descripcion = $body->descripcion;
+        //     $precio = $body->precio;
+        //     $id_categoria = $body->id_categoria;
+
+            
+        //     if (empty($nombre) || empty($descripcion) || empty($precio) || empty($id_categoria)) {
+        //         $this->view->response("Complete los datos", 400);
+        //         return; 
+        //     }
+        
+        //     $id = $this->model->insert($nombre, $descripcion, $precio, $id_categoria);
+        
+        //     if ($id) { 
+                
+        //         $producto = $this->model->get($id);
+        //         $this->view->response($producto, 201);
+        //     }
+        //     else {
+        //         $this->view->response("El producto no pudo insertarse", 500);
+        //     }
+        // }
+        public function createProduct ($params = []) {
             $body = $this->getData();
             $nombre = $body->nombre;
             $descripcion = $body->descripcion;
             $precio = $body->precio;
             $id_categoria = $body->id_categoria;
-
-            // Verificamos que los campos no estén vacíos antes de insertar
+  
             if (empty($nombre) || empty($descripcion) || empty($precio) || empty($id_categoria)) {
                 $this->view->response("Complete los datos", 400);
-                return; // El return debe estar dentro del bloque if
-            }
-        
-            $id = $this->model->insert($nombre, $descripcion, $precio, $id_categoria);
-        
-            if ($id) { // Corregir la sintaxis del if aquí
-                // En una API REST, es buena práctica devolver el recurso creado
-                $producto = $this->model->get($id);
-                $this->view->response($producto, 201);
+                return; 
             }
             else {
-                $this->view->response("El producto no pudo insertarse", 500);
+                $this->model->insert($nombre, $descripcion, $precio, $id_categoria);
+                $this->view->response("El producto fue insertado con éxito", 200);
             }
+            
         }
-        
         
 
         public function updateProduct($params = []) {
             $id = $params[':ID'];
-            var_dump($id);
             $product = $this->model->getProduct($id);
-            var_dump($product);
 
             if ($product) {
                 $body = $this->getData();
@@ -113,20 +127,9 @@
                 $this->model->update($id, $nombre, $descripcion, $precio, $id_categoria);
                 
                 $this->view->response("El producto fue actualizado con éxito", 200);
-                var_dump($body);
-                var_dump($nombre);
-                var_dump($descripcion);
-                var_dump($precio);
-                var_dump($id_categoria);
 
             } else {
                 $this->view->response("El producto con el id=$id no existe", 404);
-                var_dump($product);
-                var_dump($id);
-                var_dump($nombre);
-                var_dump($descripcion);
-                var_dump($precio);
-                var_dump($id_categoria);
             }
         }
 
